@@ -1,0 +1,122 @@
+name: AlumniConnect CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  # 1. Backend Linting, Testing, and Security Scan
+  backend-ci:
+    name: Backend CI (Python / FastAPI / MySQL)
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: RootTestPassword2026!
+          MYSQL_DATABASE: alumniconnect
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest pytest-cov pip-audit
+          pip install -r backend/requirements.txt
+
+      - name: Code Linting (flake8)
+        run: |
+          flake8 backend/app --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 backend/app --count --exit-zero --max-complexity=15 --max-line-length=127 --statistics
+
+      - name: Security Vulnerability Scan (pip-audit)
+        run: |
+          pip-audit || echo "Security scan completed with advisory warnings"
+
+      - name: Run Pytest Test Suite
+        env:
+          DATABASE_URL: sqlite:///./alumniconnect_test.db
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          ENVIRONMENT: test
+        run: |
+          cd backend
+          python -m pytest tests/ -v --cov=app --cov-report=term-missing
+
+  # 2. Frontend Linting, Typecheck, and Production Build
+  frontend-ci:
+    name: Frontend CI (Next.js / TypeScript)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: frontend/package.json
+
+      - name: Install Dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Next.js Production Build Validation
+        run: |
+          cd frontend
+          npm run build
+
+      - name: Security Vulnerability Scan (npm audit)
+        run: |
+          cd frontend
+          npm audit --audit-level=high || echo "High security scan completed"
+
+  # 3. Docker Container Build Verification
+  docker-build:
+    name: Docker Build Validation
+    needs: [backend-ci, frontend-ci]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Backend Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: false
+          tags: alumniconnect-backend:latest
+
+      - name: Build Frontend Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          push: false
+          tags: alumniconnect-frontend:latest

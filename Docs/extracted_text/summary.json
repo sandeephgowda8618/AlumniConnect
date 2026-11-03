@@ -1,0 +1,3673 @@
+{
+  "AlumniConnect_Application_Architecture.pdf": {
+    "pages": 20,
+    "toc": [
+      [
+        1,
+        "1. Purpose and architectural direction",
+        2
+      ],
+      [
+        2,
+        "1.1 Product boundary",
+        2
+      ],
+      [
+        2,
+        "1.2 Core architectural decision",
+        2
+      ],
+      [
+        2,
+        "1.3 Why this is the right fit",
+        2
+      ],
+      [
+        2,
+        "1.4 Design principles",
+        2
+      ],
+      [
+        1,
+        "2. Overall application architecture",
+        3
+      ],
+      [
+        2,
+        "2.1 Tier responsibilities",
+        3
+      ],
+      [
+        2,
+        "2.2 API Gateway interpretation",
+        3
+      ],
+      [
+        2,
+        "2.3 Request path at a glance",
+        3
+      ],
+      [
+        1,
+        "3. Frontend architecture",
+        4
+      ],
+      [
+        2,
+        "3.1 Portal structure",
+        4
+      ],
+      [
+        2,
+        "3.2 Suggested frontend route map",
+        4
+      ],
+      [
+        2,
+        "3.3 Frontend component organisation",
+        4
+      ],
+      [
+        1,
+        "4. Backend architecture and module boundaries",
+        5
+      ],
+      [
+        2,
+        "4.1 Recommended internal layering",
+        5
+      ],
+      [
+        1,
+        "4.2 Module catalogue",
+        6
+      ],
+      [
+        1,
+        "5. How modules collaborate",
+        7
+      ],
+      [
+        2,
+        "5.1 Student requests a mentor",
+        7
+      ],
+      [
+        2,
+        "5.2 Mentor accepts or rejects a request",
+        7
+      ],
+      [
+        2,
+        "5.3 Availability and bookings",
+        7
+      ],
+      [
+        2,
+        "5.4 Offline session recording",
+        7
+      ],
+      [
+        2,
+        "5.5 Feedback and mentor review",
+        7
+      ],
+      [
+        1,
+        "6. MySQL: authoritative relational database",
+        8
+      ],
+      [
+        2,
+        "6.1 Logical data domains",
+        8
+      ],
+      [
+        2,
+        "6.2 Key conceptual relationships",
+        8
+      ],
+      [
+        2,
+        "6.3 Core integrity rules",
+        8
+      ],
+      [
+        1,
+        "7. Redis and Neo4j: specialised data stores",
+        9
+      ],
+      [
+        2,
+        "7.1 Redis - performance and temporary state",
+        9
+      ],
+      [
+        3,
+        "Cache-aside read pattern",
+        9
+      ],
+      [
+        2,
+        "7.2 Neo4j - relationship recommendation model",
+        9
+      ],
+      [
+        2,
+        "7.3 Recommendation dimensions",
+        10
+      ],
+      [
+        1,
+        "8. Cross-database consistency and event processing",
+        11
+      ],
+      [
+        2,
+        "8.1 Transactional outbox pattern",
+        11
+      ],
+      [
+        2,
+        "8.2 Example: mentor changes skills",
+        11
+      ],
+      [
+        2,
+        "8.3 Reliability requirements for the worker",
+        11
+      ],
+      [
+        1,
+        "9. Booking workflow and concurrency control",
+        12
+      ],
+      [
+        2,
+        "9.1 Checks before confirmation",
+        13
+      ],
+      [
+        2,
+        "9.2 Transaction responsibilities",
+        13
+      ],
+      [
+        2,
+        "9.3 Concurrency safeguards",
+        13
+      ],
+      [
+        1,
+        "10. Sessions, feedback and notifications",
+        14
+      ],
+      [
+        2,
+        "10.1 Booking is not the session",
+        14
+      ],
+      [
+        2,
+        "10.2 Feedback and review rules",
+        14
+      ],
+      [
+        2,
+        "10.3 Notification event matrix",
+        14
+      ],
+      [
+        2,
+        "10.4 Notification processing sequence",
+        14
+      ],
+      [
+        1,
+        "11. API surface and module mapping",
+        15
+      ],
+      [
+        2,
+        "11.1 Standard request handling",
+        15
+      ],
+      [
+        1,
+        "12. How the architecture demonstrates DBMS concepts",
+        16
+      ],
+      [
+        2,
+        "12.1 Query-processing path for a screen",
+        16
+      ],
+      [
+        1,
+        "13. Security, reliability and operational boundaries",
+        17
+      ],
+      [
+        2,
+        "13.1 Access control",
+        17
+      ],
+      [
+        2,
+        "13.2 Reliability boundaries",
+        17
+      ],
+      [
+        2,
+        "13.3 Observability",
+        17
+      ],
+      [
+        1,
+        "14. Deployment and runtime topology",
+        18
+      ],
+      [
+        2,
+        "14.1 Logical runtime units",
+        18
+      ],
+      [
+        2,
+        "14.2 Practical development layout",
+        18
+      ],
+      [
+        2,
+        "14.3 Suggested backend package layout",
+        18
+      ],
+      [
+        1,
+        "15. Implementation sequence and acceptance checklist",
+        19
+      ],
+      [
+        2,
+        "15.1 Architecture acceptance checklist",
+        19
+      ],
+      [
+        2,
+        "15.2 Scope boundary",
+        19
+      ],
+      [
+        1,
+        "Appendix A. Source alignment and design assumptions",
+        20
+      ],
+      [
+        2,
+        "Appendix B. Explicit design assumptions",
+        20
+      ],
+      [
+        2,
+        "Appendix C. Short glossary",
+        20
+      ]
+    ],
+    "size_bytes": 49190
+  },
+  "AlumniConnect_Business_Rules_Catalogue.pdf": {
+    "pages": 31,
+    "toc": [
+      [
+        1,
+        "Document Control and Reading Guide",
+        2
+      ],
+      [
+        2,
+        "How to interpret the rules",
+        2
+      ],
+      [
+        1,
+        "Contents",
+        2
+      ],
+      [
+        1,
+        "1. Executive Summary and Design Basis",
+        3
+      ],
+      [
+        2,
+        "1.1 What this catalogue is intended to protect",
+        3
+      ],
+      [
+        2,
+        "1.2 Normative terms",
+        3
+      ],
+      [
+        2,
+        "1.3 Source-aligned product scope",
+        3
+      ],
+      [
+        1,
+        "2. Domain Model and Core Definitions",
+        4
+      ],
+      [
+        2,
+        "2.1 Critical distinctions",
+        4
+      ],
+      [
+        1,
+        "3. Global Identity, Access and Profile Rules",
+        5
+      ],
+      [
+        2,
+        "3.1 Account and identity rules",
+        5
+      ],
+      [
+        2,
+        "3.2 Profile, skill and domain rules",
+        5
+      ],
+      [
+        1,
+        "4. Mentorship Request Rules and Lifecycle",
+        6
+      ],
+      [
+        2,
+        "4.1 Request rule catalogue",
+        6
+      ],
+      [
+        2,
+        "4.2 Request transition table",
+        7
+      ],
+      [
+        2,
+        "4.3 Required acceptance behaviour",
+        7
+      ],
+      [
+        1,
+        "5. Allocation Rules",
+        8
+      ],
+      [
+        2,
+        "5.1 Allocation lifecycle",
+        8
+      ],
+      [
+        1,
+        "6. Availability and Booking Rules",
+        8
+      ],
+      [
+        2,
+        "6.1 Availability rules",
+        9
+      ],
+      [
+        2,
+        "6.2 Booking rules",
+        9
+      ],
+      [
+        2,
+        "6.3 Time-overlap definition",
+        10
+      ],
+      [
+        2,
+        "6.4 Atomic booking sequence",
+        11
+      ],
+      [
+        1,
+        "7. Session, Feedback and Review Rules",
+        11
+      ],
+      [
+        2,
+        "7.1 Session rules",
+        11
+      ],
+      [
+        2,
+        "7.2 Session feedback rules",
+        12
+      ],
+      [
+        2,
+        "7.3 Mentor review rules",
+        12
+      ],
+      [
+        2,
+        "7.4 Why booking, session, feedback and review need separate records",
+        13
+      ],
+      [
+        1,
+        "8. Notifications, Audit and Administration Rules",
+        13
+      ],
+      [
+        2,
+        "8.1 Notification rules",
+        13
+      ],
+      [
+        2,
+        "8.2 Audit rules",
+        13
+      ],
+      [
+        2,
+        "8.3 Administrator rules",
+        14
+      ],
+      [
+        1,
+        "9. Rule Enforcement Matrix and Relational Constraints",
+        14
+      ],
+      [
+        2,
+        "9.1 Suggested logical constraints",
+        14
+      ],
+      [
+        2,
+        "9.2 Example DDL fragments",
+        15
+      ],
+      [
+        2,
+        "9.3 What constraints cannot safely do alone",
+        16
+      ],
+      [
+        1,
+        "10. Trigger Design and MySQL Trigger Examples",
+        16
+      ],
+      [
+        2,
+        "10.1 Where triggers fit in AlumniConnect",
+        16
+      ],
+      [
+        2,
+        "10.2 Trigger T1: audit request status transitions",
+        16
+      ],
+      [
+        2,
+        "10.3 Trigger T2: last-line guard for mentor reviews",
+        17
+      ],
+      [
+        2,
+        "10.4 Trigger implementation cautions",
+        18
+      ],
+      [
+        1,
+        "11. Stored Procedure Catalogue and Implementation Examples",
+        18
+      ],
+      [
+        2,
+        "11.1 Recommended procedure inventory",
+        18
+      ],
+      [
+        2,
+        "11.2 Procedure parameter design",
+        19
+      ],
+      [
+        2,
+        "11.3 Procedure P1: accept a mentorship request",
+        19
+      ],
+      [
+        2,
+        "11.4 Procedure P2: create a booking safely",
+        20
+      ],
+      [
+        2,
+        "11.5 Procedure P3: submit a mentor review",
+        22
+      ],
+      [
+        2,
+        "11.6 Cancellation and rescheduling procedure contract",
+        23
+      ],
+      [
+        1,
+        "12. Transactions, ACID, Isolation and Concurrency",
+        24
+      ],
+      [
+        2,
+        "12.1 ACID applied to AlumniConnect",
+        24
+      ],
+      [
+        2,
+        "12.2 Concurrency anomalies relevant to the platform",
+        24
+      ],
+      [
+        2,
+        "12.3 Locking strategy",
+        24
+      ],
+      [
+        2,
+        "12.4 Isolation level guidance",
+        24
+      ],
+      [
+        2,
+        "12.5 Deadlocks and retry behaviour",
+        25
+      ],
+      [
+        2,
+        "12.6 Transactional outbox pattern",
+        25
+      ],
+      [
+        1,
+        "13. Views, Functions, Indexes and Advanced SQL",
+        25
+      ],
+      [
+        2,
+        "13.1 Views",
+        25
+      ],
+      [
+        2,
+        "13.2 Stored functions",
+        26
+      ],
+      [
+        2,
+        "13.3 Advanced SQL showcases",
+        26
+      ],
+      [
+        2,
+        "13.4 Indexing guidelines",
+        26
+      ],
+      [
+        1,
+        "14. Redis, Neo4j and Cross-Database Consistency",
+        26
+      ],
+      [
+        2,
+        "14.1 Cross-store rules",
+        27
+      ],
+      [
+        1,
+        "15. Security, Privacy and Data Lifecycle",
+        27
+      ],
+      [
+        2,
+        "15.1 Authorization rules",
+        27
+      ],
+      [
+        2,
+        "15.2 Privacy and retention",
+        28
+      ],
+      [
+        2,
+        "15.3 Data deletion policy",
+        28
+      ],
+      [
+        1,
+        "16. Verification and Acceptance Test Catalogue",
+        28
+      ],
+      [
+        2,
+        "16.1 Concurrency test procedure: same slot",
+        29
+      ],
+      [
+        2,
+        "16.2 Evidence to capture for project evaluation",
+        29
+      ],
+      [
+        1,
+        "17. Policy Decisions to Finalise",
+        30
+      ],
+      [
+        1,
+        "18. Implementation Checklist and Source Basis",
+        30
+      ],
+      [
+        2,
+        "18.1 Recommended implementation order",
+        30
+      ],
+      [
+        2,
+        "18.2 Mapping to DBMS course concepts",
+        31
+      ],
+      [
+        2,
+        "18.3 Source basis",
+        31
+      ]
+    ],
+    "size_bytes": 80811
+  },
+  "AlumniConnect_Conceptual_ER_Diagram.pdf": {
+    "pages": 18,
+    "toc": [],
+    "size_bytes": 30364
+  },
+  "AlumniConnect_Neo4j_Graph_Design.pdf": {
+    "pages": 32,
+    "toc": [
+      [
+        1,
+        "1. Purpose, scope and design decisions",
+        4
+      ],
+      [
+        1,
+        "2. Place of Neo4j in the database architecture",
+        5
+      ],
+      [
+        1,
+        "3. Graph modelling principles",
+        6
+      ],
+      [
+        1,
+        "4. Node labels and property specification",
+        8
+      ],
+      [
+        1,
+        "5. Relationship types, direction and properties",
+        10
+      ],
+      [
+        1,
+        "6. Recommended graph structure and traversal paths",
+        11
+      ],
+      [
+        1,
+        "7. Constraints and indexes",
+        12
+      ],
+      [
+        1,
+        "8. Loading graph data safely",
+        13
+      ],
+      [
+        1,
+        "9. Small end-to-end sample graph",
+        15
+      ],
+      [
+        1,
+        "10. Core Cypher traversal patterns",
+        17
+      ],
+      [
+        1,
+        "11. Multi-factor recommendation and explainability",
+        19
+      ],
+      [
+        1,
+        "12. Recommendation API integration",
+        21
+      ],
+      [
+        1,
+        "13. Synchronisation: MySQL to Neo4j",
+        22
+      ],
+      [
+        1,
+        "14. Lifecycle rules and graph hygiene",
+        24
+      ],
+      [
+        1,
+        "15. Query performance and tuning",
+        25
+      ],
+      [
+        1,
+        "16. Security, privacy and access boundaries",
+        26
+      ],
+      [
+        1,
+        "17. Testing and acceptance criteria",
+        27
+      ],
+      [
+        1,
+        "18. Implementation sequence",
+        28
+      ],
+      [
+        1,
+        "19. MySQL-to-Neo4j projection mapping",
+        29
+      ],
+      [
+        1,
+        "20. Final design summary and glossary",
+        30
+      ],
+      [
+        1,
+        "Appendix A. Consolidated graph schema checklist",
+        31
+      ],
+      [
+        1,
+        "Source basis and implementation references",
+        32
+      ]
+    ],
+    "size_bytes": 88624
+  },
+  "AlumniConnect_Product_Requirements_Document.pdf": {
+    "pages": 13,
+    "toc": [
+      [
+        1,
+        "1. Product overview",
+        2
+      ],
+      [
+        2,
+        "1.1 Problem statement",
+        2
+      ],
+      [
+        2,
+        "1.2 Product goals",
+        2
+      ],
+      [
+        2,
+        "1.3 Success indicators",
+        2
+      ],
+      [
+        2,
+        "1.4 Product scope",
+        2
+      ],
+      [
+        1,
+        "2. Actors and system context",
+        3
+      ],
+      [
+        2,
+        "2.1 System context",
+        3
+      ],
+      [
+        2,
+        "2.2 Primary user journeys",
+        4
+      ],
+      [
+        1,
+        "3. Functional requirements",
+        4
+      ],
+      [
+        2,
+        "3.1 Identity, access and profiles",
+        4
+      ],
+      [
+        1,
+        "4. Functional requirements",
+        5
+      ],
+      [
+        2,
+        "4.1 Mentor discovery, recommendations and allocation",
+        5
+      ],
+      [
+        2,
+        "4.2 Scheduling and booking",
+        6
+      ],
+      [
+        1,
+        "5. Functional requirements",
+        6
+      ],
+      [
+        2,
+        "5.1 Offline session management",
+        6
+      ],
+      [
+        2,
+        "5.2 Notifications and operations",
+        7
+      ],
+      [
+        1,
+        "6. Business rules and data requirements",
+        8
+      ],
+      [
+        2,
+        "6.1 Mandatory business rules",
+        8
+      ],
+      [
+        2,
+        "6.2 Core conceptual data areas",
+        8
+      ],
+      [
+        2,
+        "6.3 Relationship expectations",
+        8
+      ],
+      [
+        2,
+        "6.4 Data authority and synchronisation",
+        9
+      ],
+      [
+        1,
+        "7. Non-functional requirements",
+        9
+      ],
+      [
+        1,
+        "8. Non-functional requirements",
+        10
+      ],
+      [
+        2,
+        "8.1 Operational constraints",
+        11
+      ],
+      [
+        1,
+        "9. Release boundaries, acceptance and open decisions",
+        11
+      ],
+      [
+        2,
+        "9.1 Core release scope",
+        11
+      ],
+      [
+        2,
+        "9.2 Deferred / out of scope",
+        12
+      ],
+      [
+        2,
+        "9.3 Assumptions",
+        12
+      ],
+      [
+        2,
+        "9.4 Decisions to confirm before implementation",
+        12
+      ],
+      [
+        1,
+        "10. Traceability to the DBMS project",
+        13
+      ],
+      [
+        2,
+        "10.1 Suggested end-to-end acceptance demonstration",
+        13
+      ],
+      [
+        2,
+        "10.2 Reference basis and interpretation",
+        13
+      ]
+    ],
+    "size_bytes": 36889
+  },
+  "AlumniConnect_Recommendation_Design_Download_Copy.pdf": {
+    "pages": 29,
+    "toc": [
+      [
+        1,
+        "Document Control and Reading Guide",
+        2
+      ],
+      [
+        2,
+        "Requirement provenance labels",
+        2
+      ],
+      [
+        2,
+        "Contents",
+        2
+      ],
+      [
+        1,
+        "1. Executive Summary and Design Position",
+        3
+      ],
+      [
+        2,
+        "1.1 Recommendation feature goals",
+        3
+      ],
+      [
+        2,
+        "1.2 Recommended v1 design",
+        3
+      ],
+      [
+        2,
+        "1.3 What a recommendation is - and is not",
+        3
+      ],
+      [
+        1,
+        "2. Requirement Baseline and Source Alignment",
+        3
+      ],
+      [
+        2,
+        "2.1 Explicitly required vs proposed choices",
+        4
+      ],
+      [
+        1,
+        "3. Architecture and Component Responsibilities",
+        5
+      ],
+      [
+        2,
+        "3.1 Information ownership",
+        5
+      ],
+      [
+        2,
+        "3.2 Architecture principle",
+        5
+      ],
+      [
+        1,
+        "4. Neo4j Recommendation Graph Model",
+        5
+      ],
+      [
+        2,
+        "4.1 Node labels and key properties",
+        6
+      ],
+      [
+        2,
+        "4.2 Relationships and evidence properties",
+        6
+      ],
+      [
+        2,
+        "4.3 Graph modelling rules",
+        6
+      ],
+      [
+        1,
+        "5. End-to-End Recommendation Pipeline",
+        8
+      ],
+      [
+        2,
+        "5.1 Detailed processing steps",
+        8
+      ],
+      [
+        2,
+        "5.2 Required output contract",
+        9
+      ],
+      [
+        1,
+        "6. Filtering and Candidate Eligibility",
+        9
+      ],
+      [
+        2,
+        "6.1 Three classes of filter",
+        9
+      ],
+      [
+        2,
+        "6.2 Mandatory MySQL eligibility checks",
+        10
+      ],
+      [
+        2,
+        "6.3 User-selected filters",
+        10
+      ],
+      [
+        2,
+        "6.4 Filter combination rules",
+        10
+      ],
+      [
+        1,
+        "7. Scoring Framework and Configurable Weights",
+        11
+      ],
+      [
+        2,
+        "7.1 Overall score formula",
+        11
+      ],
+      [
+        2,
+        "7.2 Configuration versioning",
+        12
+      ],
+      [
+        1,
+        "8. Dimension Score Calculation",
+        12
+      ],
+      [
+        2,
+        "8.1 Skill similarity - 30%",
+        12
+      ],
+      [
+        2,
+        "8.2 Domain relevance - 20%",
+        12
+      ],
+      [
+        2,
+        "8.3 Relevant experience - 15%",
+        12
+      ],
+      [
+        2,
+        "8.4 Career relevance - 20%",
+        13
+      ],
+      [
+        2,
+        "8.5 Mentor quality - 15%",
+        13
+      ],
+      [
+        1,
+        "9. Worked Recommendation Example",
+        14
+      ],
+      [
+        2,
+        "9.1 Candidate evidence",
+        14
+      ],
+      [
+        2,
+        "9.2 Example component scores and weighted contributions",
+        14
+      ],
+      [
+        2,
+        "9.3 Interpretation rules",
+        14
+      ],
+      [
+        1,
+        "10. Recommendation Explanation Design",
+        14
+      ],
+      [
+        2,
+        "10.1 Explanation components",
+        14
+      ],
+      [
+        2,
+        "10.2 Sample student-facing card",
+        15
+      ],
+      [
+        2,
+        "10.3 Explanation payload design",
+        15
+      ],
+      [
+        2,
+        "10.4 Explanation generation rules",
+        15
+      ],
+      [
+        1,
+        "11. Recommendation History and Relational Data Design",
+        16
+      ],
+      [
+        2,
+        "11.1 Recommended relationships",
+        16
+      ],
+      [
+        2,
+        "11.2 Why the history must be immutable",
+        16
+      ],
+      [
+        2,
+        "11.3 Input snapshot fields",
+        16
+      ],
+      [
+        1,
+        "12. MySQL Storage Templates",
+        17
+      ],
+      [
+        2,
+        "12.3 Storage and integrity guidance",
+        18
+      ],
+      [
+        1,
+        "13. Neo4j Candidate Retrieval - Cypher Examples",
+        19
+      ],
+      [
+        2,
+        "13.1 Skill-based candidate discovery",
+        19
+      ],
+      [
+        2,
+        "13.2 Domain-based candidate discovery",
+        19
+      ],
+      [
+        2,
+        "13.3 Professional-context discovery",
+        19
+      ],
+      [
+        2,
+        "13.4 Merge and de-duplicate candidates",
+        19
+      ],
+      [
+        1,
+        "14. MySQL Eligibility Validation and Final Ranking",
+        20
+      ],
+      [
+        2,
+        "14.1 SQL-style eligibility template",
+        20
+      ],
+      [
+        2,
+        "14.2 Score combination and ranking",
+        20
+      ],
+      [
+        2,
+        "14.3 Index / query optimisation candidates",
+        21
+      ],
+      [
+        1,
+        "15. Redis Recommendation Cache and Performance",
+        22
+      ],
+      [
+        2,
+        "15.1 Suggested key design",
+        22
+      ],
+      [
+        2,
+        "15.2 Invalidation triggers",
+        22
+      ],
+      [
+        1,
+        "16. Cross-Database Consistency and Event Processing",
+        22
+      ],
+      [
+        2,
+        "16.1 Mentor skill update example",
+        23
+      ],
+      [
+        2,
+        "16.2 Worker reliability requirements",
+        23
+      ],
+      [
+        2,
+        "16.3 Graph freshness in a recommendation run",
+        23
+      ],
+      [
+        1,
+        "17. FastAPI Module and API Contract",
+        24
+      ],
+      [
+        2,
+        "17.1 Module responsibilities",
+        24
+      ],
+      [
+        2,
+        "17.2 Illustrative API endpoints",
+        24
+      ],
+      [
+        2,
+        "17.3 Request payload example",
+        24
+      ],
+      [
+        2,
+        "17.4 Select-to-request flow",
+        24
+      ],
+      [
+        1,
+        "18. Edge Cases and Degraded Behaviour",
+        25
+      ],
+      [
+        1,
+        "19. Security, Privacy and Responsible Ranking",
+        26
+      ],
+      [
+        2,
+        "19.1 Data access",
+        26
+      ],
+      [
+        2,
+        "19.2 Responsible scoring principles",
+        26
+      ],
+      [
+        2,
+        "19.3 Profile completeness and data confidence",
+        26
+      ],
+      [
+        1,
+        "20. Evaluation Metrics and Acceptance Tests",
+        26
+      ],
+      [
+        2,
+        "20.1 Product / recommendation metrics",
+        26
+      ],
+      [
+        2,
+        "20.2 Acceptance test catalogue",
+        27
+      ],
+      [
+        2,
+        "20.3 Performance target from the PRD",
+        27
+      ],
+      [
+        1,
+        "21. Implementation Roadmap and DBMS Syllabus Mapping",
+        28
+      ],
+      [
+        2,
+        "21.1 Implementation stages",
+        28
+      ],
+      [
+        2,
+        "21.2 Mapping to the DBMS course",
+        28
+      ],
+      [
+        2,
+        "21.3 Recommended viva explanation",
+        28
+      ],
+      [
+        1,
+        "22. Team Decisions to Finalise Before Coding",
+        28
+      ],
+      [
+        1,
+        "23. Glossary",
+        29
+      ],
+      [
+        1,
+        "24. Source Basis and Document Alignment",
+        29
+      ]
+    ],
+    "size_bytes": 68414
+  },
+  "AlumniConnect_Redis_Design_Specification.pdf": {
+    "pages": 24,
+    "toc": [],
+    "size_bytes": 57955
+  },
+  "AlumniConnect_Relational_Design_Specification.pdf": {
+    "pages": 49,
+    "toc": [
+      [
+        1,
+        "Document control and reading guide",
+        2
+      ],
+      [
+        2,
+        "How to use this document",
+        2
+      ],
+      [
+        2,
+        "Contents",
+        2
+      ],
+      [
+        1,
+        "1. Executive design summary",
+        3
+      ],
+      [
+        2,
+        "Core relational domains",
+        3
+      ],
+      [
+        1,
+        "2. Scope, assumptions and design decisions",
+        4
+      ],
+      [
+        2,
+        "2.1 Source alignment and important reconciliations",
+        4
+      ],
+      [
+        1,
+        "3. Relational modelling conventions",
+        6
+      ],
+      [
+        2,
+        "Key terminology",
+        6
+      ],
+      [
+        2,
+        "Naming and datatype conventions",
+        6
+      ],
+      [
+        1,
+        "4. Proposed relation catalogue",
+        7
+      ],
+      [
+        2,
+        "4.1 Identity and organization",
+        7
+      ],
+      [
+        3,
+        "ROLE",
+        7
+      ],
+      [
+        3,
+        "USER_ACCOUNT",
+        7
+      ],
+      [
+        3,
+        "STUDENT_PROFILE",
+        7
+      ],
+      [
+        3,
+        "MENTOR_PROFILE",
+        8
+      ],
+      [
+        3,
+        "DEPARTMENT",
+        8
+      ],
+      [
+        3,
+        "COMPANY",
+        8
+      ],
+      [
+        2,
+        "4.2 Skills and mentorship domains",
+        10
+      ],
+      [
+        3,
+        "SKILL",
+        10
+      ],
+      [
+        3,
+        "STUDENT_SKILL",
+        10
+      ],
+      [
+        3,
+        "MENTOR_SKILL",
+        10
+      ],
+      [
+        3,
+        "MENTORSHIP_DOMAIN",
+        11
+      ],
+      [
+        3,
+        "STUDENT_DOMAIN_INTEREST",
+        11
+      ],
+      [
+        3,
+        "MENTOR_DOMAIN_EXPERTISE",
+        11
+      ],
+      [
+        2,
+        "4.3 Discovery, requests and allocation",
+        12
+      ],
+      [
+        3,
+        "MENTORSHIP_REQUEST",
+        12
+      ],
+      [
+        3,
+        "RECOMMENDATION_RUN",
+        12
+      ],
+      [
+        3,
+        "RECOMMENDED_MENTOR",
+        12
+      ],
+      [
+        3,
+        "MENTOR_ALLOCATION",
+        13
+      ],
+      [
+        2,
+        "4.4 Availability, booking and sessions",
+        14
+      ],
+      [
+        3,
+        "MENTOR_AVAILABILITY",
+        14
+      ],
+      [
+        3,
+        "BOOKING",
+        14
+      ],
+      [
+        3,
+        "MENTORSHIP_SESSION",
+        14
+      ],
+      [
+        3,
+        "SESSION_SKILL_ASSESSMENT (recommended extension)",
+        15
+      ],
+      [
+        2,
+        "4.5 Feedback, notifications and audit",
+        16
+      ],
+      [
+        3,
+        "SESSION_FEEDBACK",
+        16
+      ],
+      [
+        3,
+        "MENTOR_REVIEW",
+        16
+      ],
+      [
+        3,
+        "NOTIFICATION_OUTBOX",
+        16
+      ],
+      [
+        3,
+        "NOTIFICATION",
+        17
+      ],
+      [
+        3,
+        "AUDIT_LOG",
+        17
+      ],
+      [
+        1,
+        "5. Keys, functional dependencies, Armstrong axioms and minimal cover",
+        18
+      ],
+      [
+        2,
+        "5.1 Key patterns used in AlumniConnect",
+        18
+      ],
+      [
+        2,
+        "5.2 Principal dependencies by relation",
+        18
+      ],
+      [
+        2,
+        "5.3 Types of functional dependency",
+        19
+      ],
+      [
+        2,
+        "5.4 Armstrong axioms and useful inference rules",
+        20
+      ],
+      [
+        2,
+        "5.5 Minimal cover (canonical cover)",
+        20
+      ],
+      [
+        1,
+        "6. Candidate-key derivation and attribute closure",
+        21
+      ],
+      [
+        2,
+        "Example 1 - StudentSkill composite key",
+        21
+      ],
+      [
+        2,
+        "Example 2 - UserAccount alternate key",
+        21
+      ],
+      [
+        2,
+        "Example 3 - RecommendedMentor candidate keys",
+        21
+      ],
+      [
+        2,
+        "Example 4 - Allocation request uniqueness",
+        21
+      ],
+      [
+        2,
+        "Example 5 - Booking key and why the availability FK is not a global candidate key",
+        21
+      ],
+      [
+        2,
+        "Example 6 - Mentor review alternate candidate key",
+        21
+      ],
+      [
+        2,
+        "Example 7 - Partial uniqueness is not a global candidate key",
+        22
+      ],
+      [
+        2,
+        "How to compute a closure in practice",
+        22
+      ],
+      [
+        1,
+        "7. Normalization walkthrough: 1NF to BCNF, with 4NF/5NF context",
+        23
+      ],
+      [
+        2,
+        "7.1 Start with an unsafe combined relation",
+        23
+      ],
+      [
+        2,
+        "7.2 First Normal Form (1NF)",
+        23
+      ],
+      [
+        2,
+        "7.3 Second Normal Form (2NF)",
+        23
+      ],
+      [
+        2,
+        "7.4 Third Normal Form (3NF)",
+        24
+      ],
+      [
+        2,
+        "7.5 Boyce-Codd Normal Form (BCNF)",
+        24
+      ],
+      [
+        2,
+        "7.6 Lifecycle separation is also a normalization decision",
+        24
+      ],
+      [
+        2,
+        "7.7 Fourth and Fifth Normal Forms - when they matter",
+        25
+      ],
+      [
+        2,
+        "7.8 Normalization outcome by relation family",
+        25
+      ],
+      [
+        1,
+        "8. Lossless join, dependency preservation and integrity",
+        26
+      ],
+      [
+        2,
+        "8.1 Lossless (non-additive) join",
+        26
+      ],
+      [
+        2,
+        "8.2 Dependency preservation",
+        26
+      ],
+      [
+        2,
+        "8.3 Integrity constraints to implement",
+        26
+      ],
+      [
+        2,
+        "8.4 Referential action policy",
+        26
+      ],
+      [
+        1,
+        "9. MySQL DDL patterns and representative definitions",
+        27
+      ],
+      [
+        2,
+        "9.1 Reference and identity relations",
+        27
+      ],
+      [
+        2,
+        "9.2 Role-specific profiles",
+        28
+      ],
+      [
+        2,
+        "9.3 Skills and domains",
+        29
+      ],
+      [
+        2,
+        "9.4 Requests, recommendations and allocation",
+        30
+      ],
+      [
+        2,
+        "9.5 Availability, booking and session",
+        31
+      ],
+      [
+        2,
+        "9.6 Feedback and operations",
+        32
+      ],
+      [
+        1,
+        "10. Triggers, stored procedures, transaction boundaries and outbox",
+        33
+      ],
+      [
+        2,
+        "10.1 What belongs in a trigger vs a procedure",
+        33
+      ],
+      [
+        2,
+        "10.2 Trigger - validate request state transitions",
+        33
+      ],
+      [
+        2,
+        "10.3 Trigger - audit request status changes (optional)",
+        34
+      ],
+      [
+        2,
+        "10.4 Trigger - validate session lifecycle",
+        35
+      ],
+      [
+        2,
+        "10.5 Trigger - feedback eligibility",
+        35
+      ],
+      [
+        2,
+        "10.6 Trigger - protect allocation and booking status transitions",
+        36
+      ],
+      [
+        2,
+        "10.7 Trigger - protect mentor review eligibility",
+        36
+      ],
+      [
+        2,
+        "10.8 Stored procedure - accept a mentorship request",
+        36
+      ],
+      [
+        2,
+        "10.9 Stored procedure - create a confirmed booking atomically",
+        39
+      ],
+      [
+        2,
+        "10.10 Stored procedure - record a session outcome",
+        41
+      ],
+      [
+        2,
+        "10.11 Stored procedure - submit a mentor review",
+        42
+      ],
+      [
+        2,
+        "10.12 Other useful procedures to add",
+        42
+      ],
+      [
+        2,
+        "10.13 Transaction, ACID, isolation, locking and cross-store consistency",
+        43
+      ],
+      [
+        3,
+        "Lock order and concurrency pattern",
+        43
+      ],
+      [
+        3,
+        "Isolation-level guidance",
+        43
+      ],
+      [
+        3,
+        "Transactional outbox and polyglot persistence",
+        44
+      ],
+      [
+        3,
+        "Example reconciliation queries",
+        44
+      ],
+      [
+        1,
+        "11. Indexing, views, CTEs and query optimization",
+        45
+      ],
+      [
+        2,
+        "11.1 Index candidates",
+        45
+      ],
+      [
+        2,
+        "11.2 Views for safe, reusable reporting",
+        45
+      ],
+      [
+        2,
+        "11.3 User-defined functions - when they are useful",
+        46
+      ],
+      [
+        2,
+        "11.3 Query patterns worth demonstrating for DBMS assessment",
+        46
+      ],
+      [
+        1,
+        "12. Test matrix, implementation checklist and open decisions",
+        47
+      ],
+      [
+        2,
+        "12.1 Integrity and normalization test matrix",
+        47
+      ],
+      [
+        2,
+        "12.2 Implementation sequence",
+        47
+      ],
+      [
+        2,
+        "12.3 Open decisions requiring team approval",
+        48
+      ],
+      [
+        1,
+        "Appendix A. Glossary and design references",
+        49
+      ],
+      [
+        2,
+        "Design references used",
+        49
+      ]
+    ],
+    "size_bytes": 122353
+  },
+  "AlumniConnect_SQL_Query_Catalogue_Final.pdf": {
+    "pages": 37,
+    "toc": [
+      [
+        1,
+        "Document guide and implementation status",
+        2
+      ],
+      [
+        2,
+        "How requirements are labelled",
+        2
+      ],
+      [
+        2,
+        "What this catalogue contains",
+        2
+      ],
+      [
+        2,
+        "Contents",
+        2
+      ],
+      [
+        1,
+        "1. System and database responsibilities",
+        3
+      ],
+      [
+        2,
+        "1.1 SQL belongs at the centre of business correctness",
+        3
+      ],
+      [
+        1,
+        "2. Evolution of the database model",
+        3
+      ],
+      [
+        2,
+        "2.1 Resolve two old/new status differences",
+        4
+      ],
+      [
+        2,
+        "2.2 Added entities in the expanded model",
+        4
+      ],
+      [
+        1,
+        "3. SQL schema contract and conventions",
+        4
+      ],
+      [
+        2,
+        "3.1 Core reference and identity tables",
+        4
+      ],
+      [
+        2,
+        "3.2 Skills, expertise and domain tables",
+        5
+      ],
+      [
+        2,
+        "3.3 Lifecycle and operations tables",
+        5
+      ],
+      [
+        2,
+        "3.4 Recommendation, audit and event tables",
+        6
+      ],
+      [
+        2,
+        "3.5 Canonical status vocabulary",
+        6
+      ],
+      [
+        2,
+        "3.6 MySQL and naming conventions",
+        6
+      ],
+      [
+        1,
+        "4. Query catalogue at a glance",
+        7
+      ],
+      [
+        2,
+        "4.1 Roles that use the query catalogue",
+        7
+      ],
+      [
+        1,
+        "5. Core retrieval and join queries",
+        7
+      ],
+      [
+        2,
+        "Q01 Student profile with department",
+        7
+      ],
+      [
+        2,
+        "Q02 Public mentor directory",
+        8
+      ],
+      [
+        2,
+        "Q03 Mentor skills and proficiency",
+        8
+      ],
+      [
+        2,
+        "Q04 Student skills and learning goals",
+        8
+      ],
+      [
+        2,
+        "Q05 Mentor expertise by domain",
+        9
+      ],
+      [
+        2,
+        "Q06 Incomplete mentor profiles (NULL handling)",
+        9
+      ],
+      [
+        1,
+        "6. Discovery, relational operations and subqueries",
+        9
+      ],
+      [
+        2,
+        "Q07 Mentor candidates by shared skills",
+        9
+      ],
+      [
+        2,
+        "Q08 Mentors in a student-preferred domain",
+        10
+      ],
+      [
+        2,
+        "Q09 Combine skill-based and domain-based mentor candidates (UNION)",
+        10
+      ],
+      [
+        2,
+        "Q10 Find students without an active allocation (correlated NOT EXISTS)",
+        11
+      ],
+      [
+        2,
+        "Q11 Mentors with above-average experience in their domain",
+        11
+      ],
+      [
+        2,
+        "Q12 Alumni / mentors with a particular skill at Expert level",
+        11
+      ],
+      [
+        2,
+        "Q13 Mentors currently mentoring the most students",
+        12
+      ],
+      [
+        2,
+        "Q14 Find mentors with no reviews yet",
+        12
+      ],
+      [
+        1,
+        "7. Requests, allocations, bookings and session history",
+        12
+      ],
+      [
+        2,
+        "Q15 Mentor pending-request inbox",
+        12
+      ],
+      [
+        2,
+        "Q16 Student request and decision history",
+        12
+      ],
+      [
+        2,
+        "Q17 Student mentorship history with sessions",
+        13
+      ],
+      [
+        2,
+        "Q18 Completed mentorship sessions per mentor",
+        13
+      ],
+      [
+        2,
+        "Q19 Students with no recent completed session",
+        13
+      ],
+      [
+        2,
+        "Q20 Booking calendar for a mentor",
+        14
+      ],
+      [
+        1,
+        "8. Aggregation and operational analytics queries",
+        14
+      ],
+      [
+        2,
+        "Q21 Requests by department and mentorship domain",
+        14
+      ],
+      [
+        2,
+        "Q22 Mentors with highest average review rating",
+        14
+      ],
+      [
+        2,
+        "Q23 Average mentor rating by department",
+        15
+      ],
+      [
+        2,
+        "Q24 Mentorship domains with highest request volume",
+        15
+      ],
+      [
+        2,
+        "Q25 Monthly session completion report",
+        15
+      ],
+      [
+        2,
+        "Q26 Booking cancellation and no-show rates",
+        15
+      ],
+      [
+        2,
+        "Q27 Mentor capacity utilisation",
+        16
+      ],
+      [
+        2,
+        "Q28 Skill demand versus mentor supply",
+        16
+      ],
+      [
+        1,
+        "9. Views and safe data presentation",
+        16
+      ],
+      [
+        2,
+        "V01 - Public mentor directory",
+        16
+      ],
+      [
+        2,
+        "V02 - Mentor review summary",
+        17
+      ],
+      [
+        2,
+        "V03 - Student request and allocation summary",
+        17
+      ],
+      [
+        2,
+        "V04 - Session outcome summary by mentor",
+        17
+      ],
+      [
+        2,
+        "Querying a view",
+        17
+      ],
+      [
+        1,
+        "10. Stored functions",
+        18
+      ],
+      [
+        2,
+        "F01 - Convert a numeric rating to a label",
+        18
+      ],
+      [
+        2,
+        "Function versus procedure",
+        18
+      ],
+      [
+        1,
+        "11. Stored procedures and transactional operations",
+        18
+      ],
+      [
+        2,
+        "SP01 - Accept a mentorship request and create an allocation",
+        19
+      ],
+      [
+        2,
+        "SP02 - Create an atomic booking",
+        20
+      ],
+      [
+        2,
+        "SP03 - Cancel a booking and retain history",
+        23
+      ],
+      [
+        2,
+        "SP04 - Record the actual session outcome",
+        24
+      ],
+      [
+        2,
+        "SP05 - Submit a mentor review",
+        25
+      ],
+      [
+        2,
+        "11.1 Recommended uniqueness and range constraints",
+        26
+      ],
+      [
+        1,
+        "12. Triggers and audit enforcement",
+        26
+      ],
+      [
+        2,
+        "TR01 - Audit request status changes",
+        26
+      ],
+      [
+        2,
+        "TR02 - Reject invalid request-status transitions",
+        27
+      ],
+      [
+        2,
+        "TR03 - Validate session status transitions",
+        27
+      ],
+      [
+        2,
+        "TR04 - Reject mentor reviews for invalid sessions",
+        27
+      ],
+      [
+        2,
+        "12.1 Trigger coverage matrix",
+        28
+      ],
+      [
+        1,
+        "13. CTEs, window functions and full-text search",
+        28
+      ],
+      [
+        2,
+        "Q29 Request-to-allocation-to-session funnel using CTEs",
+        28
+      ],
+      [
+        2,
+        "Q30 Rank mentors within each mentorship domain",
+        29
+      ],
+      [
+        2,
+        "Q31 Latest session per allocation (ROW_NUMBER)",
+        29
+      ],
+      [
+        2,
+        "Q32 - Full-text search in mentor biographies",
+        29
+      ],
+      [
+        1,
+        "14. Indexing and query optimisation",
+        30
+      ],
+      [
+        2,
+        "14.1 Recommended secondary indexes",
+        30
+      ],
+      [
+        2,
+        "14.2 EXPLAIN the mentor discovery query",
+        30
+      ],
+      [
+        2,
+        "14.3 EXPLAIN ANALYZE example",
+        31
+      ],
+      [
+        2,
+        "14.4 Query-writing practices",
+        31
+      ],
+      [
+        1,
+        "15. Transactions, concurrency and outbox integration",
+        31
+      ],
+      [
+        2,
+        "15.1 Where transactions are required",
+        31
+      ],
+      [
+        2,
+        "15.2 Why locking matters for booking",
+        31
+      ],
+      [
+        2,
+        "15.3 Transactional outbox pattern",
+        32
+      ],
+      [
+        1,
+        "16. Administrator analytics catalogue",
+        32
+      ],
+      [
+        2,
+        "16.1 Recommendation performance query",
+        33
+      ],
+      [
+        2,
+        "16.2 Admin report privacy",
+        33
+      ],
+      [
+        1,
+        "17. Verification and acceptance-test matrix",
+        33
+      ],
+      [
+        1,
+        "18. DBMS syllabus mapping and implementation order",
+        34
+      ],
+      [
+        2,
+        "18.1 Suggested implementation sequence",
+        35
+      ],
+      [
+        1,
+        "Appendix A. Source-document traceability",
+        35
+      ],
+      [
+        2,
+        "Source page pointers (for quick review)",
+        36
+      ],
+      [
+        1,
+        "Appendix B. SQL execution checklist",
+        37
+      ],
+      [
+        2,
+        "Evidence to retain for the DBMS demonstration",
+        37
+      ]
+    ],
+    "size_bytes": 103606
+  },
+  "AlumniConnect_Security_and_Authorization_Design.pdf": {
+    "pages": 22,
+    "toc": [
+      [
+        1,
+        "Document guide and design conventions",
+        2
+      ],
+      [
+        2,
+        "What this document covers",
+        2
+      ],
+      [
+        2,
+        "Requirement labels",
+        2
+      ],
+      [
+        2,
+        "Contents",
+        2
+      ],
+      [
+        1,
+        "01 / Security architecture and trust boundaries",
+        3
+      ],
+      [
+        2,
+        "1.1 Security ownership by component",
+        3
+      ],
+      [
+        2,
+        "1.2 Non-negotiable trust boundaries",
+        3
+      ],
+      [
+        1,
+        "02 / Identity and authentication",
+        4
+      ],
+      [
+        2,
+        "2.1 Common account identity",
+        4
+      ],
+      [
+        2,
+        "2.2 Authentication requirements",
+        4
+      ],
+      [
+        2,
+        "2.3 Authentication flow",
+        4
+      ],
+      [
+        2,
+        "2.4 Account status lifecycle",
+        5
+      ],
+      [
+        2,
+        "2.4.1 Suspension and reactivation procedure",
+        5
+      ],
+      [
+        1,
+        "03 / Authorization model: RBAC plus resource context",
+        6
+      ],
+      [
+        2,
+        "3.1 Three authorization dimensions",
+        6
+      ],
+      [
+        2,
+        "3.2 Default-deny decision policy",
+        6
+      ],
+      [
+        2,
+        "3.3 Recommended authorization decision contract",
+        6
+      ],
+      [
+        2,
+        "3.4 Role assignment versus profile existence",
+        7
+      ],
+      [
+        3,
+        "Role/profile combinations to validate",
+        7
+      ],
+      [
+        1,
+        "04 / Role and permission catalogue",
+        8
+      ],
+      [
+        2,
+        "4.1 Student / Mentee",
+        8
+      ],
+      [
+        2,
+        "4.2 Alumni / Mentor",
+        8
+      ],
+      [
+        2,
+        "4.3 Administrator",
+        9
+      ],
+      [
+        1,
+        "05 / Workflow-specific authorization rules",
+        10
+      ],
+      [
+        2,
+        "5.1 Action boundaries that must not be conflated",
+        10
+      ],
+      [
+        2,
+        "5.2 Cancellation and rescheduling policies",
+        10
+      ],
+      [
+        1,
+        "06 / Resource and data-access matrix",
+        11
+      ],
+      [
+        1,
+        "07 / Data classification and field-level exposure",
+        12
+      ],
+      [
+        2,
+        "7.1 Recommended data classes",
+        12
+      ],
+      [
+        2,
+        "7.2 Public mentor directory projection",
+        12
+      ],
+      [
+        2,
+        "7.3 Feedback and review visibility",
+        12
+      ],
+      [
+        1,
+        "08 / FastAPI enforcement architecture",
+        13
+      ],
+      [
+        2,
+        "8.1 Recommended request pipeline",
+        13
+      ],
+      [
+        2,
+        "8.2 Illustrative FastAPI policy pattern",
+        13
+      ],
+      [
+        2,
+        "8.3 Endpoint policy examples",
+        13
+      ],
+      [
+        2,
+        "8.4 Avoid common API authorization defects",
+        14
+      ],
+      [
+        1,
+        "09 / MySQL, Redis and Neo4j access boundaries",
+        15
+      ],
+      [
+        2,
+        "9.1 MySQL / InnoDB",
+        15
+      ],
+      [
+        2,
+        "9.2 Redis",
+        15
+      ],
+      [
+        2,
+        "9.3 Neo4j",
+        15
+      ],
+      [
+        2,
+        "9.4 Background worker / service identity",
+        15
+      ],
+      [
+        1,
+        "10 / Administrative controls and audit boundaries",
+        16
+      ],
+      [
+        2,
+        "10.1 Administrator permission design",
+        16
+      ],
+      [
+        2,
+        "10.2 Prohibited implicit administrator powers",
+        16
+      ],
+      [
+        2,
+        "10.3 Audit event catalogue",
+        16
+      ],
+      [
+        1,
+        "11 / Privacy, data lifecycle and secure operations",
+        17
+      ],
+      [
+        2,
+        "11.1 Least-privilege data exposure",
+        17
+      ],
+      [
+        2,
+        "11.2 Retention and deactivation",
+        17
+      ],
+      [
+        2,
+        "11.3 Secrets and deployment",
+        17
+      ],
+      [
+        2,
+        "11.4 Operational monitoring",
+        17
+      ],
+      [
+        1,
+        "12 / Threat scenarios and defensive controls",
+        18
+      ],
+      [
+        2,
+        "12.1 Safe error and response behaviour",
+        18
+      ],
+      [
+        1,
+        "13 / Security verification and acceptance tests",
+        19
+      ],
+      [
+        2,
+        "13.1 Required evidence for project demonstration",
+        19
+      ],
+      [
+        1,
+        "14 / Configuration decisions and implementation roadmap",
+        20
+      ],
+      [
+        2,
+        "14.1 Decisions to finalize before implementation",
+        20
+      ],
+      [
+        2,
+        "14.2 Practical implementation order",
+        20
+      ],
+      [
+        2,
+        "14.3 Definition of done",
+        20
+      ],
+      [
+        1,
+        "Appendix A / Permission catalogue",
+        21
+      ],
+      [
+        1,
+        "Appendix B / Source traceability",
+        22
+      ],
+      [
+        2,
+        "Appendix C / Interpretation notes",
+        22
+      ]
+    ],
+    "size_bytes": 64141
+  },
+  "AlumniConnect_Testing_and_Evaluation_Plan.pdf": {
+    "pages": 31,
+    "toc": [
+      [
+        1,
+        "Document map",
+        2
+      ],
+      [
+        2,
+        "How to use this plan",
+        2
+      ],
+      [
+        1,
+        "1. Purpose, scope and test principles",
+        3
+      ],
+      [
+        2,
+        "1.1 Test objectives",
+        3
+      ],
+      [
+        2,
+        "1.2 Scope included in the core release",
+        3
+      ],
+      [
+        2,
+        "1.3 Explicitly out of scope for core acceptance",
+        3
+      ],
+      [
+        1,
+        "2. System under test and quality objectives",
+        4
+      ],
+      [
+        2,
+        "2.1 System responsibilities",
+        4
+      ],
+      [
+        2,
+        "2.2 Quality attributes",
+        4
+      ],
+      [
+        1,
+        "3. Test strategy, levels and coverage",
+        6
+      ],
+      [
+        2,
+        "3.1 Test levels",
+        6
+      ],
+      [
+        2,
+        "3.2 Test types and required coverage",
+        6
+      ],
+      [
+        2,
+        "3.3 Test priority",
+        7
+      ],
+      [
+        1,
+        "4. Environment, fixtures and data management",
+        8
+      ],
+      [
+        2,
+        "4.1 Test environments",
+        8
+      ],
+      [
+        2,
+        "4.2 Minimum test data entities",
+        8
+      ],
+      [
+        2,
+        "4.3 Data management rules",
+        8
+      ],
+      [
+        1,
+        "5. Requirements traceability and release priorities",
+        9
+      ],
+      [
+        2,
+        "5.1 Test ID convention",
+        9
+      ],
+      [
+        1,
+        "6. Database integrity and relational validation",
+        10
+      ],
+      [
+        2,
+        "6.1 Domain invariants to assert after test runs",
+        11
+      ],
+      [
+        1,
+        "7. Workflow and end-to-end functional testing",
+        12
+      ],
+      [
+        2,
+        "7.1 Identity, profiles and catalogue workflow",
+        12
+      ],
+      [
+        2,
+        "7.2 Request and allocation lifecycle",
+        12
+      ],
+      [
+        2,
+        "7.3 Availability and booking workflow",
+        13
+      ],
+      [
+        2,
+        "7.4 Session, feedback and review workflow",
+        13
+      ],
+      [
+        2,
+        "7.5 Administrator and analytics workflow",
+        14
+      ],
+      [
+        1,
+        "8. Transaction, ACID and concurrency testing",
+        15
+      ],
+      [
+        2,
+        "8.1 ACID acceptance criteria",
+        15
+      ],
+      [
+        2,
+        "8.2 Concurrency test execution method",
+        15
+      ],
+      [
+        2,
+        "8.3 Concurrency catalogue",
+        15
+      ],
+      [
+        2,
+        "8.4 Isolation anomaly verification",
+        16
+      ],
+      [
+        2,
+        "8.5 Failure injection points",
+        16
+      ],
+      [
+        1,
+        "9. Cross-database integration: Redis, Neo4j and outbox",
+        18
+      ],
+      [
+        2,
+        "9.1 Transactional outbox tests",
+        18
+      ],
+      [
+        2,
+        "9.2 Redis integration catalogue",
+        18
+      ],
+      [
+        2,
+        "9.3 Neo4j graph integration catalogue",
+        19
+      ],
+      [
+        2,
+        "9.4 Combined discovery response test",
+        20
+      ],
+      [
+        1,
+        "10. Security, authorization and privacy verification",
+        21
+      ],
+      [
+        2,
+        "10.1 Security acceptance catalogue",
+        21
+      ],
+      [
+        2,
+        "10.2 Privacy assertions",
+        22
+      ],
+      [
+        1,
+        "11. Performance and capacity evaluation",
+        23
+      ],
+      [
+        2,
+        "11.1 Metrics to capture",
+        23
+      ],
+      [
+        2,
+        "11.2 Workload scenarios",
+        23
+      ],
+      [
+        2,
+        "11.3 Recommended workload mix",
+        24
+      ],
+      [
+        2,
+        "11.4 Performance experiment procedure",
+        24
+      ],
+      [
+        1,
+        "12. Reliability, resilience and failure injection",
+        25
+      ],
+      [
+        2,
+        "12.1 Dependency failure tests",
+        25
+      ],
+      [
+        2,
+        "12.2 Retry and error mapping",
+        25
+      ],
+      [
+        2,
+        "12.3 Backup, restore and rebuild",
+        25
+      ],
+      [
+        1,
+        "13. Reporting, query plans and operational observability",
+        26
+      ],
+      [
+        2,
+        "13.1 SQL/report validation",
+        26
+      ],
+      [
+        2,
+        "13.2 Query-plan evaluation",
+        26
+      ],
+      [
+        2,
+        "13.3 Operational dashboard / log checks",
+        26
+      ],
+      [
+        1,
+        "14. Execution process, defect management and exit gates",
+        27
+      ],
+      [
+        2,
+        "14.1 Entry criteria",
+        27
+      ],
+      [
+        2,
+        "14.2 Execution order",
+        27
+      ],
+      [
+        2,
+        "14.3 Defect severity and handling",
+        27
+      ],
+      [
+        2,
+        "14.4 Exit criteria",
+        28
+      ],
+      [
+        1,
+        "15. Acceptance demonstration and evidence pack",
+        29
+      ],
+      [
+        2,
+        "15.1 Suggested complete demonstration",
+        29
+      ],
+      [
+        2,
+        "15.2 Evidence pack checklist",
+        29
+      ],
+      [
+        1,
+        "16. Open decisions, assumptions and source traceability",
+        30
+      ],
+      [
+        2,
+        "16.1 Team decisions to finalize before test execution",
+        30
+      ],
+      [
+        2,
+        "16.2 Assumptions and interpretation",
+        30
+      ],
+      [
+        2,
+        "16.3 Source documents consolidated",
+        30
+      ]
+    ],
+    "size_bytes": 73516
+  },
+  "AlumniConnect_Transaction_and_Consistency_Design.pdf": {
+    "pages": 32,
+    "toc": [],
+    "size_bytes": 82342
+  },
+  "AlumniConnect_Use_Case_Model.pdf": {
+    "pages": 20,
+    "toc": [],
+    "size_bytes": 41424
+  },
+  "AlumniConnect_Workflow_and_State_Diagrams.pdf": {
+    "pages": 25,
+    "toc": [
+      [
+        1,
+        "Document guide and modelling conventions",
+        2
+      ],
+      [
+        2,
+        "Scope covered",
+        2
+      ],
+      [
+        2,
+        "How to read the diagrams",
+        2
+      ],
+      [
+        2,
+        "Requirement provenance",
+        2
+      ],
+      [
+        1,
+        "End-to-end workflow architecture",
+        3
+      ],
+      [
+        2,
+        "Lifecycle ownership by component",
+        3
+      ],
+      [
+        2,
+        "Key separation of concerns",
+        3
+      ],
+      [
+        1,
+        "Mentorship request lifecycle",
+        4
+      ],
+      [
+        2,
+        "State transition catalogue",
+        4
+      ],
+      [
+        2,
+        "Business rules",
+        4
+      ],
+      [
+        1,
+        "Mentor allocation lifecycle",
+        5
+      ],
+      [
+        2,
+        "What an allocation represents",
+        5
+      ],
+      [
+        2,
+        "Blueprint-defined allocation controls",
+        5
+      ],
+      [
+        2,
+        "Recommended allocation statuses (confirm with team)",
+        5
+      ],
+      [
+        1,
+        "Availability and booking lifecycle",
+        6
+      ],
+      [
+        2,
+        "Distinguish the records",
+        6
+      ],
+      [
+        2,
+        "Booking confirmation guards",
+        6
+      ],
+      [
+        2,
+        "Recommended status treatment",
+        6
+      ],
+      [
+        1,
+        "Atomic booking - detailed sequence",
+        7
+      ],
+      [
+        2,
+        "Why this operation must be atomic",
+        7
+      ],
+      [
+        2,
+        "Recommended lock order",
+        8
+      ],
+      [
+        2,
+        "Overlap predicate",
+        8
+      ],
+      [
+        1,
+        "Session lifecycle and outcome recording",
+        9
+      ],
+      [
+        2,
+        "Session workflow",
+        9
+      ],
+      [
+        2,
+        "Session state rules",
+        9
+      ],
+      [
+        1,
+        "Feedback and mentor review lifecycle",
+        10
+      ],
+      [
+        2,
+        "Session feedback",
+        10
+      ],
+      [
+        2,
+        "Mentor review",
+        10
+      ],
+      [
+        2,
+        "Suggested lifecycle",
+        10
+      ],
+      [
+        1,
+        "Notifications and transactional outbox",
+        11
+      ],
+      [
+        2,
+        "Blueprint event-to-recipient mapping",
+        11
+      ],
+      [
+        2,
+        "Outbox pattern",
+        11
+      ],
+      [
+        1,
+        "Trigger design for AlumniConnect",
+        12
+      ],
+      [
+        2,
+        "Where triggers add value",
+        12
+      ],
+      [
+        2,
+        "What should not be done in triggers",
+        12
+      ],
+      [
+        1,
+        "Trigger examples - state guards and audit",
+        13
+      ],
+      [
+        2,
+        "A. Reject an invalid mentorship-request transition",
+        13
+      ],
+      [
+        2,
+        "B. Audit a request status change",
+        13
+      ],
+      [
+        1,
+        "Trigger example - session lifecycle guard",
+        14
+      ],
+      [
+        2,
+        "C. Guard the mentorship-session lifecycle",
+        14
+      ],
+      [
+        2,
+        "Trigger deployment checklist",
+        14
+      ],
+      [
+        1,
+        "Stored procedures - responsibility map",
+        15
+      ],
+      [
+        2,
+        "Procedure parameter modes",
+        15
+      ],
+      [
+        1,
+        "Procedure example - accept or reject a request",
+        16
+      ],
+      [
+        1,
+        "Procedure example - request acceptance (continued)",
+        17
+      ],
+      [
+        1,
+        "Procedure example - atomic booking",
+        18
+      ],
+      [
+        2,
+        "Mandatory booking constraints",
+        18
+      ],
+      [
+        1,
+        "Procedures - cancellation, session outcome and feedback",
+        19
+      ],
+      [
+        2,
+        "A. Cancel a booking",
+        19
+      ],
+      [
+        2,
+        "B. Record session outcome",
+        19
+      ],
+      [
+        2,
+        "C. Submit feedback / mentor review",
+        19
+      ],
+      [
+        1,
+        "Constraints, indexes and idempotency",
+        20
+      ],
+      [
+        2,
+        "Integrity mechanisms by problem",
+        20
+      ],
+      [
+        2,
+        "Suggested indexes",
+        20
+      ],
+      [
+        1,
+        "Transactions, ACID and concurrency",
+        21
+      ],
+      [
+        2,
+        "ACID applied to request acceptance",
+        21
+      ],
+      [
+        2,
+        "Locking and deadlocks",
+        21
+      ],
+      [
+        2,
+        "Suggested transaction boundaries",
+        21
+      ],
+      [
+        1,
+        "Additional DBMS concepts worth demonstrating",
+        22
+      ],
+      [
+        2,
+        "Recommended analytical views",
+        22
+      ],
+      [
+        1,
+        "Testing the lifecycle and transitions",
+        23
+      ],
+      [
+        1,
+        "Recommended implementation order and open decisions",
+        24
+      ],
+      [
+        2,
+        "Suggested implementation order",
+        24
+      ],
+      [
+        2,
+        "Open decisions the team should record",
+        24
+      ],
+      [
+        1,
+        "Source alignment and technical references",
+        25
+      ],
+      [
+        2,
+        "Supplied project and course material",
+        25
+      ],
+      [
+        2,
+        "MySQL 8.4 Reference Manual",
+        25
+      ],
+      [
+        2,
+        "Important implementation notes",
+        25
+      ]
+    ],
+    "size_bytes": 48715
+  },
+  "Alumni\u2013Student Mentorship Platform_ DBMS Project Blueprint.pdf": {
+    "pages": 34,
+    "toc": [
+      [
+        1,
+        "Alumni\u2013Student Mentorship Platform: DBMS Project Blueprint ",
+        1
+      ],
+      [
+        2,
+        "1. Project vision and scope ",
+        1
+      ],
+      [
+        1,
+        "AlumniConnect ",
+        1
+      ],
+      [
+        2,
+        "The main user roles ",
+        2
+      ],
+      [
+        2,
+        "Core application modules ",
+        2
+      ],
+      [
+        1,
+        "2. Recommended application architecture ",
+        3
+      ],
+      [
+        2,
+        "2.1 Architecture style: modular monolith + multiple databases ",
+        3
+      ],
+      [
+        3,
+        "Technology choices ",
+        4
+      ],
+      [
+        1,
+        "3. Database architecture: what each database should actually do ",
+        6
+      ],
+      [
+        2,
+        "3.1 The source-of-truth principle ",
+        8
+      ],
+      [
+        1,
+        "4. Designing the application domain ",
+        9
+      ],
+      [
+        2,
+        "4.1 Proposed conceptual entities ",
+        10
+      ],
+      [
+        2,
+        "4.2 Important relationships ",
+        11
+      ],
+      [
+        3,
+        "Decision 1: Separate User from Student and Mentor profiles ",
+        12
+      ],
+      [
+        3,
+        "Decision 2: Separate Booking from Mentorship Session ",
+        13
+      ],
+      [
+        1,
+        "5. Neo4j: Make the recommendation system a real feature ",
+        13
+      ],
+      [
+        2,
+        "5.1 What should the graph represent? ",
+        14
+      ],
+      [
+        2,
+        "5.2 Example: how mentor recommendations should work ",
+        15
+      ],
+      [
+        2,
+        " ",
+        17
+      ],
+      [
+        2,
+        " ",
+        17
+      ],
+      [
+        2,
+        " ",
+        17
+      ],
+      [
+        2,
+        " ",
+        17
+      ],
+      [
+        2,
+        " ",
+        17
+      ],
+      [
+        2,
+        "5.3 Recommendation pipeline ",
+        18
+      ],
+      [
+        2,
+        "5.4 Recommendation explainability ",
+        19
+      ],
+      [
+        2,
+        "5.5 Keep Neo4j synchronised with MySQL ",
+        19
+      ],
+      [
+        1,
+        "6. Redis: Plan actual application-level use cases ",
+        20
+      ],
+      [
+        2,
+        "Cache invalidation strategy ",
+        21
+      ],
+      [
+        1,
+        "7. Important business workflows ",
+        22
+      ],
+      [
+        2,
+        "Workflow 1: Student discovers and requests a mentor ",
+        22
+      ],
+      [
+        2,
+        " ",
+        23
+      ],
+      [
+        2,
+        "Workflow 2: Alumni accepts a request ",
+        23
+      ],
+      [
+        2,
+        " ",
+        23
+      ],
+      [
+        2,
+        "Workflow 3: Booking a mock interview ",
+        23
+      ],
+      [
+        2,
+        "Workflow 4: Offline mock interview and session recording ",
+        25
+      ],
+      [
+        2,
+        "Workflow 5: Feedback and reviews ",
+        25
+      ],
+      [
+        2,
+        "Workflow 6: Notifications ",
+        26
+      ],
+      [
+        1,
+        "8. How to demonstrate all four DBMS units ",
+        27
+      ],
+      [
+        2,
+        "8.1 Unit 1: Relational design ",
+        28
+      ],
+      [
+        2,
+        "8.2 Unit 2: Advanced SQL showcase ",
+        28
+      ],
+      [
+        2,
+        "8.3 Unit 3: Normalisation and query optimisation ",
+        30
+      ],
+      [
+        2,
+        "8.4 Unit 4: Advanced database functionality ",
+        31
+      ],
+      [
+        1,
+        "9. Improvements to your existing mini-project ",
+        31
+      ],
+      [
+        2,
+        "One additional recommendation: recommendation history ",
+        33
+      ],
+      [
+        1,
+        "10. Scope and project priorities ",
+        33
+      ]
+    ],
+    "size_bytes": 33435
+  }
+}

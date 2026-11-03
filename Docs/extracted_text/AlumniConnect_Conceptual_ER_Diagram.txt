@@ -1,0 +1,810 @@
+=== PAGE 1 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 1
+ALUMNICONNECT
+Conceptual Entity-Relationship
+Diagram & Domain Model
+A detailed conceptual model of the Alumni–Student Mentorship and Mock Interview Platform.
+Document
+Conceptual ER Diagram and Relationship Specification
+Project
+AlumniConnect - Alumni–Student Mentorship Platform
+Version
+1.0 | 02 November 2026
+Model coverage
+24 conceptual entities | 36 relationships | 4 domain diagrams
+Primary database
+MySQL 8.x with InnoDB - authoritative relational system of record
+Purpose. Establish the business entities, the meaning of their relationships, and the minimum/maximum participation of each entity before converting the model into relational tables.
+Prepared from the supplied “Alumni–Student Mentorship Platform: DBMS Project Blueprint”. Where the blueprint gives an entity but does not fully define a cardinality, the modelling assumption is stated explicitly in this document.
+
+=== PAGE 2 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 2
+1. Model scope and reading guide
+This is a conceptual ER model: it describes the platform domain and its business relationships, not the final physical MySQL schema. Entity identifiers and example attributes are included to make
+each concept understandable. Data types, indexes, SQL column definitions and implementation-specific foreign-key names are intentionally omitted.
+What the model covers
+Domain
+Entities included
+Purpose
+Identity and reference
+Role, User, Student Profile, Mentor Profile, Department,
+Company
+One account identity, role-specific profiles and academic/professional
+reference data.
+Skills and domains
+Skill, Student Skill, Mentor Skill, Mentorship Domain, Student
+Domain Interest, Mentor Domain Expertise
+Many-to-many expertise, skills and career interests.
+Discovery and allocation
+Mentorship Request, Recommendation Run, Recommended
+Mentor, Mentor Allocation
+Requests, candidate recommendations, ranking history and accepted
+relationships.
+Scheduling and sessions
+Mentor Availability, Booking, Mentorship Session
+Published slots, planned appointments and actual offline meeting
+outcomes.
+Feedback and operations
+Session Feedback, Mentor Review, Notification, Notification
+Outbox, Audit Log
+Structured feedback, ratings, reliable event delivery and historical
+traceability.
+Notation used in diagrams
+Notation
+Meaning
+1
+Exactly one related instance is required.
+0..1
+Optional relationship: zero or one related instance.
+0..*
+Optional one-to-many: zero, one or many related instances.
+1..*
+At least one related instance is required (not used as a default in this model).
+Associative entity
+An entity that resolves a many-to-many relationship and may hold relationship-specific attributes.
+How to read a relationship: In “Department 1 — 0..* Student Profile”, one department may be associated with many student profiles, while each student profile references exactly one primary
+department. Read the endpoint cardinality next to the entity at that end of the line.
+Important architecture boundary: MySQL owns authoritative identities, profiles, requests, allocations, bookings, sessions, feedback and reviews. Redis contains rebuildable caches and temporary
+state; Neo4j contains a relationship-oriented projection for recommendations. Redis and Neo4j are storage technologies, not additional business entities in this conceptual ER diagram.
+Source basis: The supplied “Alumni–Student Mentorship Platform: DBMS Project Blueprint”, particularly its project vision and roles (pp. 1–3), conceptual entities and relationships (pp. 9–13), graph domain (pp. 14–19), workflows (pp.
+20–27) and scope (pp. 32–34). Cardinalities not fixed by the blueprint are labelled as modelling assumptions later in this document.
+
+=== PAGE 3 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 3
+Diagram 1 - Identity, profiles and reference data
+One shared account identity supports role-specific student and alumni profiles, connected to department and company reference data.
+Endpoint labels show minimum..maximum participation. Entity cards show logical identifiers and example attributes; they do not define SQL data types.
+Profiles and users may reappear on multiple diagram pages to keep each business domain readable; they refer to the same conceptual entities.
+
+=== PAGE 4 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 4
+Diagram 2 - Skills, expertise and mentorship domains
+Associative entities resolve the many-to-many relationships between students, mentors, skills and mentorship domains.
+Endpoint labels show minimum..maximum participation. Entity cards show logical identifiers and example attributes; they do not define SQL data types.
+Profiles and users may reappear on multiple diagram pages to keep each business domain readable; they refer to the same conceptual entities.
+
+=== PAGE 5 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 5
+Diagram 3 - Mentor discovery, recommendations and allocation
+A request, repeated recommendation runs, candidate recommendations and the accepted allocation are separate concepts.
+Endpoint labels show minimum..maximum participation. Entity cards show logical identifiers and example attributes; they do not define SQL data types.
+Profiles and users may reappear on multiple diagram pages to keep each business domain readable; they refer to the same conceptual entities.
+
+=== PAGE 6 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 6
+Diagram 4 - Mentor availability and booking
+Mentors publish available slots; students reserve a slot for an appointment. MySQL must enforce one booking per slot.
+Endpoint labels show minimum..maximum participation. Entity cards show logical identifiers and example attributes; they do not define SQL data types.
+Profiles and users may reappear on multiple diagram pages to keep each business domain readable; they refer to the same conceptual entities.
+
+=== PAGE 7 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 7
+Diagram 5 - Sessions, feedback and mentor reviews
+A session is the actual meeting record. Structured participant feedback and a student review of the mentor are modelled separately.
+Endpoint labels show minimum..maximum participation. Entity cards show logical identifiers and example attributes; they do not define SQL data types.
+Profiles and users may reappear on multiple diagram pages to keep each business domain readable; they refer to the same conceptual entities.
+
+=== PAGE 8 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 8
+Diagram 6 - Notifications and audit trail
+The transactional outbox records events reliably; recipient notifications and user-attributed audit records are modelled separately.
+Endpoint labels show minimum..maximum participation. Entity cards show logical identifiers and example attributes; they do not define SQL data types.
+Profiles and users may reappear on multiple diagram pages to keep each business domain readable; they refer to the same conceptual entities.
+
+=== PAGE 9 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 9
+2. Entity catalogue - Part 1
+Entity
+Domain
+Conceptual identifier / example attributes
+Responsibility
+ROLE
+Identity
+role_id; role_name; description
+Defines a platform role such as Student, Mentor or Administrator.
+USER
+Identity
+user_id; email; password_hash; account_status; created_at
+Common login identity and account status shared by all account types.
+STUDENT PROFILE
+Identity
+student_id; full_name; academic_year; graduation_year;
+career_goal
+Student-specific academic and career information linked to a common
+User.
+MENTOR PROFILE
+Identity
+mentor_id; full_name; job_title; experience_years; capacity;
+biography
+Alumni professional profile, mentoring capacity and professional
+background.
+DEPARTMENT
+Reference data
+department_id; department_name; programme
+Academic department represented in student and alumni profiles.
+COMPANY
+Reference data
+company_id; company_name; industry; website
+Employer or company associated with a mentor profile.
+SKILL
+Reference data
+skill_id; skill_name; category
+Canonical technical or professional skill used for discovery and matching.
+STUDENT SKILL
+Associative
+student_id + skill_id; proficiency; experience_years
+Associative entity connecting a student profile to a skill.
+Identity principle: User stores the shared account identity. Student Profile and Mentor Profile store role-specific information, avoiding duplicate login credentials. A user can have neither profile (for an
+administrator), or one of each only if the product later permits dual-role accounts.
+
+=== PAGE 10 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 10
+3. Entity catalogue - Part 2
+Entity
+Domain
+Conceptual identifier / example attributes
+Responsibility
+MENTOR SKILL
+Associative
+mentor_id + skill_id; proficiency; experience_years
+Associative entity connecting a mentor profile to a skill.
+MENTORSHIP DOMAIN
+Reference data
+domain_id; domain_name; description
+Career or mentorship area, such as MLOps, Cloud or Data Analytics.
+STUDENT DOMAIN
+INTEREST
+Associative
+student_id + domain_id; priority; interest_level
+Associative entity recording domains a student wants to explore.
+MENTOR DOMAIN
+EXPERTISE
+Associative
+mentor_id + domain_id; expertise_level
+Associative entity recording the domains in which a mentor specialises.
+MENTORSHIP REQUEST
+Discovery
+request_id; objective; message; status; submitted_at
+A student request directed to a specific mentor; status is retained for
+history.
+RECOMMENDATION RUN
+Discovery
+run_id; generated_at; criteria_version; input_snapshot
+A single execution of mentor recommendation for a student.
+RECOMMENDED MENTOR
+Associative
+recommendation_id; rank; score; explanation; selected_flag
+A candidate mentor returned by one recommendation run, with ranking
+and reason.
+MENTOR ALLOCATION
+Discovery
+allocation_id; status; start_date; end_date; created_at
+The accepted mentorship relationship resulting from a request.
+Recommendation principle: Recommendation Run records one execution. Recommended Mentor records each candidate returned by that run, including rank, score and explanation. This preserves
+recommendation history rather than overwriting the latest result.
+
+=== PAGE 11 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 11
+4. Entity catalogue - Part 3
+Entity
+Domain
+Conceptual identifier / example attributes
+Responsibility
+MENTOR AVAILABILITY
+Scheduling
+availability_id; start_at; end_at; slot_status
+A time slot published by a mentor for a meeting or mock interview.
+BOOKING
+Scheduling
+booking_id; booking_type; start_at; end_at; status
+A planned appointment made by a student against a mentor availability
+slot.
+MENTORSHIP SESSION
+Session
+session_id; status; topics; skills_assessed; observations;
+next_steps
+The actual meeting record and its outcome, distinct from a planned
+booking.
+SESSION FEEDBACK
+Feedback
+feedback_id; communication; helpfulness; technical_preparation;
+comments
+Structured feedback submitted by one of the actual session participants.
+MENTOR REVIEW
+Feedback
+review_id; rating; review_text; created_at
+A student-authored rating and review of a mentor after a completed
+session.
+NOTIFICATION
+Operations
+notification_id; event_type; message; read_status; created_at
+An in-app notification delivered to one recipient user.
+NOTIFICATION OUTBOX
+Operations
+event_id; event_type; payload; delivery_status; processed_at
+Durable event record written with the business transaction for later
+delivery.
+AUDIT LOG
+Operations
+audit_id; entity_type; record_id; action; actor; occurred_at
+Historical record of a significant data or account action.
+Planned vs actual: Booking represents a planned appointment. Mentorship Session represents the actual meeting and its outcome. Cancelled bookings may have no session record.
+
+=== PAGE 12 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 12
+5. Relationship catalogue - Part 1
+ID
+From entity
+From
+end
+Relationship
+To end
+To entity
+Interpretation / rule
+R01
+ROLE
+1
+ASSIGNS
+0..*
+USER
+Each account has one primary role; a role can classify many users.
+Assumption: one primary role per account.
+R02
+USER
+1
+HAS PROFILE
+0..1
+STUDENT PROFILE
+A user may have at most one student profile; each student profile
+belongs to one user.
+R03
+USER
+1
+HAS PROFILE
+0..1
+MENTOR PROFILE
+A user may have at most one mentor profile; each mentor profile
+belongs to one user.
+R04
+DEPARTMENT
+1
+IS THE PRIMARY
+DEPARTMENT OF
+0..*
+STUDENT PROFILE
+A department can be associated with many students; each student
+profile has one primary department.
+Assumption: one primary department per student.
+R05
+DEPARTMENT
+1
+IS THE ALUMNI DEPARTMENT
+OF
+0..*
+MENTOR PROFILE
+A department can have many alumni mentors; each mentor profile
+records one primary alumni department.
+Assumption: one primary alumni department.
+R06
+COMPANY
+0..1
+EMPLOYS
+0..*
+MENTOR PROFILE
+A company can be associated with many mentors; a mentor profile
+may have zero or one current company.
+Previous employment history is not modelled.
+R07
+STUDENT PROFILE
+1
+HAS SKILL LINK
+0..*
+STUDENT SKILL
+A student can have multiple Student Skill association records; each
+record belongs to one student.
+R08
+SKILL
+1
+IS RECORDED IN
+0..*
+STUDENT SKILL
+A skill can be linked to many students; each Student Skill record
+references one skill.
+R09
+MENTOR PROFILE
+1
+HAS SKILL LINK
+0..*
+MENTOR SKILL
+A mentor can have multiple Mentor Skill association records; each
+record belongs to one mentor.
+R10
+SKILL
+1
+IS RECORDED IN
+0..*
+MENTOR SKILL
+A skill can be linked to many mentors; each Mentor Skill record
+references one skill.
+R11
+STUDENT PROFILE
+1
+HAS DOMAIN INTEREST
+0..*
+STUDENT DOMAIN
+INTEREST
+A student can express interest in multiple domains; each interest
+row belongs to one student.
+R12
+MENTORSHIP DOMAIN
+1
+IS AN INTEREST IN
+0..*
+STUDENT DOMAIN
+INTEREST
+A domain can be selected by many students; each interest row
+names one domain.
+Cardinality is shown from the source entity to the target entity. For example, “1” at the source and “0..*” at the target means one source record may be related to zero or many target records, while each target record refers back to
+exactly one source record.
+
+=== PAGE 13 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 13
+6. Relationship catalogue - Part 2
+ID
+From entity
+From
+end
+Relationship
+To end
+To entity
+Interpretation / rule
+R13
+MENTOR PROFILE
+1
+HAS DOMAIN EXPERTISE
+0..*
+MENTOR DOMAIN
+EXPERTISE
+A mentor can specialise in multiple domains; each expertise row
+belongs to one mentor.
+R14
+MENTORSHIP DOMAIN
+1
+IS A SPECIALTY IN
+0..*
+MENTOR DOMAIN
+EXPERTISE
+A domain can be associated with many mentors; each expertise
+row names one domain.
+R15
+STUDENT PROFILE
+1
+SUBMITS
+0..*
+MENTORSHIP REQUEST
+A student may submit multiple requests; each request is submitted
+by one student.
+R16
+MENTOR PROFILE
+1
+RECEIVES
+0..*
+MENTORSHIP REQUEST
+A mentor may receive many requests; each request is directed to
+one mentor.
+R17
+STUDENT PROFILE
+1
+GENERATES
+0..*
+RECOMMENDATION RUN
+A student may run mentor discovery repeatedly; each run belongs
+to one student.
+R18
+RECOMMENDATION
+RUN
+1
+RETURNS
+0..*
+RECOMMENDED MENTOR
+A recommendation run may return zero or many candidates; each
+candidate belongs to one run.
+R19
+MENTOR PROFILE
+1
+APPEARS IN
+0..*
+RECOMMENDED MENTOR
+A mentor can appear in many recommendation runs; each
+candidate row names one mentor.
+R20
+MENTORSHIP REQUEST
+1
+MAY RESULT IN
+0..1
+MENTOR ALLOCATION
+A request can result in at most one allocation; every allocation
+traces to one request.
+Rejected/cancelled requests have no allocation.
+R21
+STUDENT PROFILE
+1
+IS PARTY TO
+0..*
+MENTOR ALLOCATION
+A student may have multiple allocations over time; each allocation
+identifies one student.
+R22
+MENTOR PROFILE
+1
+IS ASSIGNED TO
+0..*
+MENTOR ALLOCATION
+A mentor may have multiple allocations subject to capacity; each
+allocation identifies one mentor.
+R23
+MENTOR PROFILE
+1
+PUBLISHES
+0..*
+MENTOR AVAILABILITY
+A mentor can publish multiple slots; each availability slot belongs to
+one mentor.
+R24
+STUDENT PROFILE
+1
+MAKES
+0..*
+BOOKING
+A student may make multiple bookings; each booking is made by
+one student.
+Cardinality is shown from the source entity to the target entity. For example, “1” at the source and “0..*” at the target means one source record may be related to zero or many target records, while each target record refers back to
+exactly one source record.
+
+=== PAGE 14 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 14
+7. Relationship catalogue - Part 3
+ID
+From entity
+From
+end
+Relationship
+To end
+To entity
+Interpretation / rule
+R25
+MENTOR AVAILABILITY
+1
+IS RESERVED BY
+0..1
+BOOKING
+A slot can be used by at most one booking; every booking reserves
+one slot.
+Must be enforced transactionally.
+R26
+MENTOR ALLOCATION
+0..1
+CAN AUTHORISE
+0..*
+BOOKING
+An allocation may authorise multiple appointments; a booking may
+be linked to zero or one allocation.
+Booking-to-allocation is optional in this conceptual model when the
+appointment is otherwise authorised.
+R27
+MENTOR ALLOCATION
+1
+CONTAINS
+0..*
+MENTORSHIP SESSION
+An allocation may have multiple actual sessions; each session
+belongs to one allocation.
+R28
+BOOKING
+1
+MATERIALISES AS
+0..1
+MENTORSHIP SESSION
+A confirmed booking may produce one session record; each
+session comes from one booking.
+Cancelled bookings need not have a session.
+R29
+MENTORSHIP SESSION
+1
+HAS
+0..*
+SESSION FEEDBACK
+A session may receive multiple structured feedback entries; each
+entry concerns one session.
+R30
+USER
+1
+AUTHORS
+0..*
+SESSION FEEDBACK
+A user may author multiple feedback entries; each entry has one
+author.
+Author must be an actual session participant.
+R31
+MENTORSHIP SESSION
+1
+MAY RECEIVE
+0..1
+MENTOR REVIEW
+A session may have at most one student review; each review refers
+to one completed session.
+Based on one student participant per session.
+R32
+STUDENT PROFILE
+1
+SUBMITS
+0..*
+MENTOR REVIEW
+A student may submit multiple reviews across sessions; each
+review has one student author.
+R33
+MENTOR PROFILE
+1
+IS REVIEWED IN
+0..*
+MENTOR REVIEW
+A mentor may receive many reviews; each review evaluates one
+mentor.
+R34
+USER
+1
+RECEIVES
+0..*
+NOTIFICATION
+A user may receive many notifications; each notification has one
+recipient.
+R35
+NOTIFICATION OUTBOX
+1
+EMITS
+0..*
+NOTIFICATION
+One outbox event can fan out to multiple recipient notifications;
+each notification traces to one event.
+R36
+USER
+0..1
+IS ACTOR FOR
+0..*
+AUDIT LOG
+A user may generate many audit entries; an audit entry may have
+no user actor when system-generated.
+Cardinality is shown from the source entity to the target entity. For example, “1” at the source and “0..*” at the target means one source record may be related to zero or many target records, while each target record refers back to
+exactly one source record.
+
+=== PAGE 15 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 15
+8. Business rules that constrain the ER model
+These rules turn the conceptual relationships into behaviours the application must preserve. They should later become database constraints, transaction rules, API validations and test cases where
+appropriate.
+Rule
+Requirement
+BR-01 - Account identity
+Each account has one common User identity. Student and mentor information belongs in separate profile entities, not duplicated login records.
+BR-02 - Role separation
+The model assigns one primary role to each user: Student, Mentor or Administrator. The blueprint does not specify multi-role accounts; a UserRole associative entity
+would be needed if multiple roles per account are required.
+BR-03 - Profile cardinality
+A User may have zero or one Student Profile and zero or one Mentor Profile. An Administrator can therefore exist without either profile.
+BR-04 - Skills and domains
+Student Skill, Mentor Skill, Student Domain Interest and Mentor Domain Expertise each resolve a many-to-many association. A profile-skill or profile-domain pair
+should not be duplicated.
+BR-05 - Recommendation history
+A Recommendation Run may return many Recommended Mentor candidates. Candidate rank, score and explanation are preserved per run so later runs do not
+erase prior results.
+BR-06 - Request lifecycle
+A Mentorship Request progresses through Pending, Accepted, Rejected or Cancelled. Rejected and cancelled requests remain available for history and analytics.
+BR-07 - Allocation creation
+A request results in at most one Mentor Allocation. Acceptance verifies that the request is still pending, checks mentor capacity, prevents duplicate active allocations
+and commits request status plus allocation atomically.
+BR-08 - Availability ownership
+Every Mentor Availability slot belongs to one Mentor Profile. A slot can be booked at most once.
+BR-09 - Booking correctness
+Before confirming a booking, validate the slot is still available, the student has no overlapping appointment, mentor capacity is respected, the relevant
+request/allocation is valid, and the submission is not a duplicate.
+BR-10 - Transactional booking
+Booking confirmation must be atomic. Concurrent attempts for the same slot must not both succeed. MySQL/InnoDB is authoritative; Redis cache must never decide
+availability.
+BR-11 - Booking vs session
+A booking is a plan. A session is the actual offline meeting. A confirmed booking may produce at most one session; a cancelled booking need not produce one.
+BR-12 - Session lifecycle
+A session can be Scheduled, Completed, Cancelled or No-show. The system preserves session history and mentor-entered topics, assessed skills, performance
+observations, improvement areas and next steps.
+BR-13 - Feedback eligibility
+Feedback cannot be submitted before a session has taken place. Only the actual student or mentor participants may author session feedback.
+BR-14 - Mentor review uniqueness
+A student can submit at most one mentor review per completed session. The review references the session, student author and mentor being reviewed.
+BR-15 - Notification events
+Requests, decisions, booking confirmations/cancellations, reminders and feedback events can produce notifications for the appropriate participants.
+BR-16 - Reliable notification delivery
+Write an outbox event in the same MySQL transaction as the business change. A background worker later delivers it; this avoids sending a notification for a
+rolled-back operation.
+BR-17 - Audit history
+Important status and data changes should be auditable. An audit record may have a user actor or be system-generated.
+BR-18 - Source of truth
+MySQL is authoritative. Redis stores temporary/rebuildable values. Neo4j is a recommendation projection and may be briefly stale; booking and allocation eligibility
+must be revalidated in MySQL.
+
+=== PAGE 16 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 16
+9. Key lifecycle views
+The following state paths are business-level illustrations from the blueprint. They are not extra entities.
+Mentorship request
+Initial state
+Allowed outcome
+ER-model consequence
+Pending
+Accepted
+Create one Mentor Allocation; retain accepted request.
+Pending
+Rejected
+Retain request; no allocation is created.
+Pending
+Cancelled
+Retain request; no allocation is created.
+Booking and session
+Object
+Illustrative states
+Meaning
+Booking
+Pending / Confirmed / Cancelled
+The scheduled appointment and reservation of a mentor availability slot.
+Mentorship Session
+Scheduled → Completed / Cancelled / No-show
+The actual meeting record, created for a confirmed appointment and maintained as history.
+Feedback and review
+Object
+Who can create it?
+When?
+Cardinality limit
+Session Feedback
+Either actual participant (student or mentor)
+After the session has taken place
+A session may have multiple feedback entries.
+Mentor Review
+Student participant
+After a completed session
+At most one student review per session.
+Example traversal: a Student Profile generates a Recommendation Run. The run returns several Recommended Mentor candidates. The student submits a Mentorship Request to one mentor. If
+accepted, the request produces one Mentor Allocation. The mentor publishes Mentor Availability; the student makes a Booking; the confirmed booking produces a Mentorship Session. Session
+Feedback and a Mentor Review are then attached to the completed session.
+
+=== PAGE 17 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 17
+10. Explicit modelling assumptions and open decisions
+The blueprint defines the business domain and several cardinalities, but it does not specify every participation constraint. The following choices make the ERD implementable without claiming that
+they were all explicitly fixed in the blueprint.
+ID / decision
+Assumption or open decision
+A1 - Primary role
+One primary Role is assigned to each User. If users must act as both student and mentor under one account, introduce UserRole (M:N) or formalise a dual-profile rule.
+A2 - Primary department
+Each Student Profile and Mentor Profile has one primary Department. If multiple degrees/departments must be represented, introduce StudentDepartment and
+MentorDepartment associative entities.
+A3 - Current company
+Mentor Profile has zero or one current Company. Prior employment history is outside this model; add MentorEmployment if needed.
+A4 - Booking authorisation
+Booking may be associated with zero or one Mentor Allocation in this conceptual model. The implementation must define whether a valid accepted request alone can
+authorise a one-off booking.
+A5 - Availability slot
+Every Booking reserves exactly one availability slot; a slot can be reserved by at most one Booking. Slot duration and time-zone rules are implementation details.
+A6 - One student per session
+The current model assumes one student and one mentor per booking/session. Group mentoring or panel interviews would require participant association entities.
+A7 - One review per session
+The one-review maximum assumes a single student participant in each session. If group sessions are later supported, uniqueness must be per student-session pair.
+A8 - Notification fan-out
+One outbox event can produce multiple notifications, for example one to the student and one to the mentor. Each notification has exactly one recipient.
+A9 - System audit actor
+Audit Log actor is optional so system-generated events can be represented without inventing a human user.
+A10 - Semantic vector search
+Vector embeddings and vector indexes are an optional Phase 2 capability and are not included as entities in this core conceptual ER model.
+11. Database responsibility and conceptual boundary
+Technology
+Role in this model
+What it does not own
+MySQL 8.x + InnoDB
+Authoritative entities and business relationships: accounts, profiles, requests, allocations,
+availability, bookings, sessions, feedback, reviews, notifications and audit data.
+No split-brain source of truth for core business state.
+Redis
+Rebuildable cache for mentor cards, reference data and recommendation results; temporary
+login/rate-limit/idempotency state.
+Must not decide whether a slot is truly available or whether an
+allocation is valid.
+Neo4j
+Graph projection of Student, Mentor, Skill, Domain, Company and Department relationships for
+discovery and explainable recommendations.
+Does not replace MySQL identity, booking or allocation authority.
+Redis Stack vector search
+(optional)
+Embeddings and semantic retrieval for free-text career goals and profile descriptions.
+Phase 2 extension; not required for this core ERD.
+12. Coverage and implementation hand-off
+This model gives the team a stable conceptual starting point for the next DBMS artefacts: an ER diagram review, relational schema mapping, functional-dependency analysis, normalisation, SQL
+DDL, constraints, indexes, transaction workflows and test data. The blueprint recommends a modular monolith: business modules may be separated in code, while the primary relational data remains
+in one MySQL database.
+
+=== PAGE 18 ===
+ALUMNICONNECT  |  CONCEPTUAL ER MODEL
+DBMS PROJECT BLUEPRINT  •  VERSION 1.0
+Conceptual model - logical entities and relationships; not a physical SQL schema
+Page 18
+Recommended next modelling step: Convert the entities and associative entities into a relational schema, define primary and foreign keys, then verify the proposed 3NF/BCNF decomposition against
+actual functional dependencies. Do not infer that the example attributes in this document are the final schema without that analysis.
+Prepared as a conceptual design deliverable for the DBMS project. This document is a design specification, not evidence that the application or database has already been implemented.
