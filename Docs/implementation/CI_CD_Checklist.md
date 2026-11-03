@@ -87,3 +87,4 @@ In the event of an anomaly during production deployment:
 1. **Application Rollback**: Revert container images to the previous stable release tag via Docker Compose or Kubernetes deployment manifest.
 2. **Database Rollback**: Point the application to the pre-deployment transactional point-in-time snapshot. All schema changes maintain backward compatibility with previous minor versions.
 3. **Cache Purge**: Execute `FLUSHDB` or targeted pattern deletion `redis-cli KEYS "ac:*" | xargs redis-cli DEL` to ensure stale caches are immediately cleared.
+

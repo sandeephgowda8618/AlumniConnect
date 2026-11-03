@@ -121,3 +121,4 @@ To ensure reliable notification dispatch without distributed 2-phase commits:
 2. A dedicated background worker (`app.workers.outbox_worker`) periodically polls `PENDING` outbox events with row locks (`SELECT ... FOR UPDATE SKIP LOCKED`).
 3. Events are delivered to `notification` and marked `PROCESSED`.
 4. Idempotency is guaranteed through unique `dedupe_key` hashes.
+

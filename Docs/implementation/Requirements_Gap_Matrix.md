@@ -44,3 +44,4 @@
 3. **P1 Stored Procedure Gaps**: 2-hour cancellation window cutoff explicitly embedded in `sp_cancel_booking`.
 4. **P1 CI/CD Gaps**: Fully automated GitHub Actions workflow established.
 5. **Deferred Non-Critical Items**: SMTP institutional email verification (P2) scheduled for Staging Phase 2 release.
+

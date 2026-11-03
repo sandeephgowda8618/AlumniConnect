@@ -120,3 +120,4 @@ jobs:
           context: ./frontend
           push: false
           tags: alumniconnect-frontend:latest
+
