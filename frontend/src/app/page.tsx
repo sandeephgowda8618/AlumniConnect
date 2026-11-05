@@ -15,8 +15,19 @@ export default function HomePage() {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const stored = api.getStoredUser();
-    setUser(stored);
+    setUser(api.getStoredUser());
+
+    const handleAuthChange = () => {
+      setUser(api.getStoredUser());
+    };
+
+    window.addEventListener('auth-change', handleAuthChange);
+    window.addEventListener('storage', handleAuthChange);
+
+    return () => {
+      window.removeEventListener('auth-change', handleAuthChange);
+      window.removeEventListener('storage', handleAuthChange);
+    };
   }, []);
 
   const handleQuickLogin = async (email: string, role: string) => {

@@ -11,9 +11,11 @@ const API_BASE = (typeof window !== 'undefined')
   : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1');
 
 class ApiClient {
-  private getToken(): string | null {
+  public getToken(): string | null {
     if (typeof window === 'undefined') return null;
-    return localStorage.getItem('ac_token');
+    const token = localStorage.getItem('ac_token');
+    if (!token || token === 'undefined' || token === 'null') return null;
+    return token;
   }
 
   public setToken(token: string) {
@@ -26,15 +28,39 @@ class ApiClient {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('ac_token');
       localStorage.removeItem('ac_user');
+      window.dispatchEvent(new Event('auth-change'));
+    }
+  }
+
+  public isAuthenticated(): boolean {
+    const token = this.getToken();
+    if (!token) return false;
+    try {
+      const parts = token.split('.');
+      if (parts.length === 3) {
+        const payload = JSON.parse(atob(parts[1]));
+        if (payload.exp && Date.now() >= payload.exp * 1000) {
+          this.clearAuth();
+          return false;
+        }
+      }
+      return true;
+    } catch {
+      return false;
     }
   }
 
   public getStoredUser(): User | null {
     if (typeof window === 'undefined') return null;
+    if (!this.isAuthenticated()) {
+      return null;
+    }
     const str = localStorage.getItem('ac_user');
-    if (!str) return null;
+    if (!str || str === 'undefined' || str === 'null') return null;
     try {
-      return JSON.parse(str);
+      const user = JSON.parse(str);
+      if (!user || !user.user_id || !user.role) return null;
+      return user;
     } catch {
       return null;
     }
@@ -43,6 +69,7 @@ class ApiClient {
   public setStoredUser(user: User) {
     if (typeof window !== 'undefined') {
       localStorage.setItem('ac_user', JSON.stringify(user));
+      window.dispatchEvent(new Event('auth-change'));
     }
   }
 

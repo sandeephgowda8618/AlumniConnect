@@ -1,31 +1,69 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { Bell, User as UserIcon, LogOut, CheckCircle, Clock } from 'lucide-react';
 import { api } from '@/lib/api';
 import { User, NotificationItem } from '@/types';
 
 export default function Navbar() {
   const router = useRouter();
+  const pathname = usePathname();
   const [user, setUser] = useState<User | null>(null);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
   const [showNotifications, setShowNotifications] = useState(false);
 
-  useEffect(() => {
+  // If on login or register page, user profile pill must never be displayed
+  const isAuthPage = pathname === '/login' || pathname === '/register';
+
+  const syncUserState = useCallback(() => {
+    if (isAuthPage) {
+      setUser(null);
+      setNotifications([]);
+      setShowNotifications(false);
+      return;
+    }
+
     const storedUser = api.getStoredUser();
     setUser(storedUser);
 
     if (storedUser) {
       api.getNotifications()
         .then(setNotifications)
-        .catch(err => console.error("Notification load error", err));
+        .catch(err => {
+          if (err.message?.includes('401') || err.message?.includes('Unauthorized')) {
+            setUser(null);
+            setNotifications([]);
+          }
+        });
+    } else {
+      setNotifications([]);
+      setShowNotifications(false);
     }
-  }, []);
+  }, [isAuthPage]);
+
+  useEffect(() => {
+    syncUserState();
+
+    const handleAuthEvent = () => {
+      syncUserState();
+    };
+
+    window.addEventListener('auth-change', handleAuthEvent);
+    window.addEventListener('storage', handleAuthEvent);
+
+    return () => {
+      window.removeEventListener('auth-change', handleAuthEvent);
+      window.removeEventListener('storage', handleAuthEvent);
+    };
+  }, [syncUserState]);
 
   const handleLogout = () => {
     api.clearAuth();
+    setUser(null);
+    setNotifications([]);
+    setShowNotifications(false);
     router.push('/login');
   };
 
@@ -128,12 +166,16 @@ export default function Navbar() {
           </div>
         ) : (
           <div className="flex items-center space-x-3">
-            <Link href="/login" className="text-sm font-medium text-slate-600 hover:text-slate-900">
-              Sign In
-            </Link>
-            <Link href="/register" className="btn-primary text-sm py-1.5 px-3">
-              Get Started
-            </Link>
+            {pathname !== '/login' && (
+              <Link href="/login" className="text-sm font-medium text-slate-600 hover:text-slate-900">
+                Sign In
+              </Link>
+            )}
+            {pathname !== '/register' && (
+              <Link href="/register" className="btn-primary text-sm py-1.5 px-3">
+                Get Started
+              </Link>
+            )}
           </div>
         )}
       </div>
